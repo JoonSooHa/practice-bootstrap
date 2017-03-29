@@ -76,7 +76,7 @@
             <div class="col-xs-6 col-sm-4 box-green"></div>
 
             <div class="clearfix visible-xs-block"></div>
-            <div class="col-xs-6 col-sm-4"></div>
+            <div class="col-xs-6 col-sm-4 box-blue"></div>
         </div>
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.js"><\/script>')</script>
@@ -99,11 +99,25 @@
         <script>
             $(document).ready(function() {
                 $(window).resize(function() {
+                    var browserWidth = 0;
+                    var deviceSize = ''
+
                     if($.browser.msie) {
-                        $('#window-size').text(document.body.parentNode.clientWidth);
+                        browserWidth = document.body.parentNode.clientWidth;
                     } else {
-                        $('#window-size').text(window.innerWidth);
+                        browserWidth = window.innerWidth;
                     }
+
+                    if(browserWidth < 768) {
+                        deviceSize = 'xs';
+                    } else if(browserWidth < 992) {
+                        deviceSize = 'sm';
+                    } else if(browserWidth < 1200) {
+                        deviceSize = 'md';
+                    } else {
+                        deviceSize = 'lg';
+                    }
+                    $('#window-size').text(deviceSize + ' (' + browserWidth + ')');
                 });
 
                 $(document).trigger('resize');
